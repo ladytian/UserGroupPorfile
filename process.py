@@ -74,7 +74,7 @@ def main():
 
 	for info in personinfo:
 		for i in info:
-			output.write(str(info[i]+','))
+			output.write(str(info[i])+',')
 		output.write('\n')
 
 if __name__ == '__main__':
