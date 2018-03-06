@@ -50,8 +50,8 @@ def main():
 	reader.next()
 	for ids, clientMacAdd, associationTime, updateTime, AP_Name, Status in reader:
 
-		if associationTime == 0 or updateTime == 0:
-			break
+		if associationTime == '0' or updateTime == '0':
+			continue
 
 		data_dict = {}
 		location = getLocation(AP_Name)
