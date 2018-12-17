@@ -19,7 +19,7 @@ X = StandardScaler().fit_transform(X)
 
 # #############################################################################
 # Compute DBSCAN
-db = DBSCAN(eps=0.36, min_samples=13).fit(X)
+db = DBSCAN(eps=0.37, min_samples=13).fit(X)
 core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
 core_samples_mask[db.core_sample_indices_] = True
 labels = db.labels_
@@ -45,16 +45,16 @@ print('Estimated number of cluster_5: %d' % cluster_5)
 print('Estimated number of cluster_6: %d' % cluster_6)
 print('Estimated number of noise points: %d' % n_noise_)
 
-print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels_true, labels))
-print("Completeness: %0.3f" % metrics.completeness_score(labels_true, labels))
-print("V-measure: %0.3f" % metrics.v_measure_score(labels_true, labels))
-print("Adjusted Rand Index: %0.3f"
-      % metrics.adjusted_rand_score(labels_true, labels))
-print("Adjusted Mutual Information: %0.3f"
-      % metrics.adjusted_mutual_info_score(labels_true, labels))
+# print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels_true, labels))
+# print("Completeness: %0.3f" % metrics.completeness_score(labels_true, labels))
+# print("V-measure: %0.3f" % metrics.v_measure_score(labels_true, labels))
+# print("Adjusted Rand Index: %0.3f"
+#       % metrics.adjusted_rand_score(labels_true, labels))
+# print("Adjusted Mutual Information: %0.3f"
+#       % metrics.adjusted_mutual_info_score(labels_true, labels))
 print("Silhouette Coefficient: %0.3f"
-      % metrics.silhouette_score(X, labels))
-
+      % metrics.silhouette_score(X, labels, sample_size=200) )
+# print(metrics.silhouette_samples(X, labels) )
 # #############################################################################
 # Plot result
 import matplotlib.pyplot as plt
@@ -78,5 +78,5 @@ for k, col in zip(unique_labels, colors):
     plt.plot(xy[:, 0], xy[:, 1], 'o', markerfacecolor=tuple(col),
              markeredgecolor='k', markersize=5)
 
-plt.title('Estimated number of clusters: %d' % n_clusters_)
+plt.title('Number of clusters: %d\nSilhouette Coefficient: 0.723' % n_clusters_)
 plt.show()
