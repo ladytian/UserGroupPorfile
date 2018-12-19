@@ -1,0 +1,518 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>基于无线感知的用户群体画像</title>
+        <script src='https://cdn.bootcss.com/echarts/3.7.0/echarts.simple.js'></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+        <script src='../static/js/echarts-wordcloud.js'></script>
+    </head>
+
+    <header>
+        <h1>基于无线感知的用户群体画像</h1>
+    </header>
+
+    <footer>
+        <p>Posted By Tianjiwei,</p>
+        <p>School of Computer Science and Engineering, Tianjin University of Technology.</p>
+    </footer>
+
+    <body>
+        <link rel="stylesheet" type="text/css" href="../static/css/portrait.css">
+
+        <div id='main'></div>
+        <div id="wordcloud"></div>
+
+        <div id='information'></div>
+        <div id='basic'></div>
+        <div id='classification'></div>
+        <div id='preferences'></div>
+        <div id='POI'></div>
+
+        <script  type="text/javascript">
+            var chart = echarts.init(document.getElementById('wordcloud'));
+
+            var option = {
+                title: {
+                    text: "用户群体词云图",
+                    left: "center",
+                },
+                tooltip: {},
+                series: [ {
+                    type: 'wordCloud',
+                    gridSize: 2,
+                    sizeRange: [20, 120],
+                    rotationRange: [-90, 90],
+                    shape: 'circle',
+                    width: 600,
+                    height: 900,
+                    drawOutOfBound: false,
+                    textStyle: {
+                        normal: {
+                            color: function () {
+                                return 'rgb(' + [
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160)
+                                ].join(',') + ')';
+                            }
+                        },
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowColor: '#333'
+                        }
+                    },
+                    data: [
+                        {
+                            name: '勤奋好学',
+                            value: 10000,
+                            textStyle: {
+                                normal: {
+                                    color: 'black'
+                                },
+                                emphasis: {
+                                    color: 'red'
+                                }
+                            }
+                        },
+                        {
+                            name: 'T2食堂',
+                            value: 6181
+                        },
+                        {
+                            name: '午休',
+                            value: 4386
+                        },
+                        {
+                            name: '均匀分配',
+                            value: 4055
+                        },
+                        {
+                            name: '用餐高峰',
+                            value: 2467
+                        },
+                        {
+                            name: '活跃',
+                            value: 2244
+                        },
+                        {
+                            name: '男',
+                            value: 1898
+                        },
+                        {
+                            name: '晚睡熬夜',
+                            value: 1484
+                        },
+                        {
+                            name: '女',
+                            value: 847
+                        },
+                        {
+                            name: '要去#6',
+                            value: 582
+                        },
+                        {
+                            name: '前期使用',
+                            value: 550
+                        },
+                        {
+                            name: '早睡早起',
+                            value: 462
+                        },
+                        {
+                            name: '要去#28',
+                            value: 366
+                        },
+                        {
+                            name: '付费',
+                            value: 360
+                        },
+                        {
+                            name: '娱乐型',
+                            value: 282
+                        },
+                        {
+                            name: '社团活动',
+                            value: 273
+                        },
+                        {
+                            name: '不午休',
+                            value: 265
+                        }
+                    ]
+                } ]
+            };
+
+            chart.setOption(option);
+
+            window.onresize = chart.resize;
+        </script>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('basic'));
+
+            var option = {
+                title: {
+                    text: "基础属性详情",
+                    left: "center",
+                },
+                tooltip: {
+                    trigger: 'item',
+                    // formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data:['本科生-男','本科生-女','研究生-男','研究生-女','23-101','23-102','26-201','26-202','26-203','26-204']
+                },
+                series: [
+                    {
+                        name:'角色-性别',
+                        type:'pie',
+                        selectedMode: 'single',
+                        radius: [0, '30%'],
+
+                        label: {
+                            normal: {
+                                position: 'inner'
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:[
+                            {value:30, name:'本科生-男', selected:false},
+                            {value:14, name:'本科生-女'}
+                        ]
+                    },
+                    {
+                        name:'宿舍',
+                        type:'pie',
+                        radius: ['40%', '55%'],
+                        label: {
+                            normal: {
+                                // formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                                backgroundColor: '#eee',
+                                borderColor: '#aaa',
+                                borderWidth: 1,
+                                borderRadius: 4,
+                                // shadowBlur:3,
+                                // shadowOffsetX: 2,
+                                // shadowOffsetY: 2,
+                                // shadowColor: '#999',
+                                // padding: [0, 7],
+                                rich: {
+                                    a: {
+                                        color: '#999',
+                                        lineHeight: 22,
+                                        align: 'center'
+                                    },
+                                    // abg: {
+                                    //     backgroundColor: '#333',
+                                    //     width: '100%',
+                                    //     align: 'right',
+                                    //     height: 22,
+                                    //     borderRadius: [4, 4, 0, 0]
+                                    // },
+                                    hr: {
+                                        borderColor: '#aaa',
+                                        width: '100%',
+                                        borderWidth: 0.5,
+                                        height: 0
+                                    },
+                                    b: {
+                                        fontSize: 16,
+                                        lineHeight: 33
+                                    },
+                                    per: {
+                                        color: '#eee',
+                                        backgroundColor: '#334455',
+                                        padding: [2, 4],
+                                        borderRadius: 2
+                                    }
+                                }
+                            }
+                        },
+                        data:[
+                            {value:4, name:'23-101'},
+                            {value:4, name:'23-102'},
+                            {value:4, name:'26-201'},
+                            {value:4, name:'26-202'},
+                            {value:4, name:'26-203'},
+                            {value:4, name:'26-204'}
+                        ]
+                    }
+                ]
+            };       
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('classification'));
+
+            var option = {
+                title: {
+                    text: '用户分级详情',
+                    left: 'center'
+                },
+                angleAxis: {
+                },
+                radiusAxis: {
+                    type: 'category',
+                    data: ['活跃', '流量', '目的', '分配'],
+                    z: 10
+                },
+                polar: {
+                },
+                series: [{
+                    type: 'bar',
+                    data: [6, 0, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '非常活跃',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [3, 0, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '活跃',
+                    stack: 'a'
+                },
+                {
+                    type: 'bar',
+                    data: [1, 0, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '不活跃',
+                    stack: 'a'
+                },
+                {
+                    type: 'bar',
+                    data: [0, 1, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '付费',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 5, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '免费',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 4, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '小流量',
+                    stack: 'a'
+                },
+                 {
+                    type: 'bar',
+                    data: [0, 0, 5, 0],
+                    coordinateSystem: 'polar',
+                    name: '学习型',
+                    stack: 'a'
+                },
+                {
+                    type: 'bar',
+                    data: [0, 0, 5, 0],
+                    coordinateSystem: 'polar',
+                    name: '娱乐型',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 0, 0, 8],
+                    coordinateSystem: 'polar',
+                    name: '前期使用',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 0, 0, 2],
+                    coordinateSystem: 'polar',
+                    name: '均匀分配',
+                    stack: 'a'
+                },
+                ],
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    show: true,
+                    data: ['非常活跃', '活跃', '不活跃', '付费', '免费', '小流量', '学习型', '娱乐型', '前期使用', '均匀分配']
+                }
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('preferences'));
+
+            var option = {
+                title: {
+                    text: "行为偏好详情",
+                    left: "center",
+                },
+                angleAxis: {
+                    type: 'category',
+                    data: ['休息', '饮食', '活动', 'POI'],
+                    z: 10
+                },
+                radiusAxis: {
+                },
+                polar: {
+                },
+                series: [{
+                    type: 'bar',
+                    data: [1, 0, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '早睡早起',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [9, 0, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '晚睡熬夜',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [7, 0, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '午休',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [3, 0, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '不午休',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 9, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '堂食',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 1, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '外带外卖',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 7, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '用餐高峰',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 3, 0, 0],
+                    coordinateSystem: 'polar',
+                    name: '用餐低峰',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 0, 6, 0],
+                    coordinateSystem: 'polar',
+                    name: '勤奋好学',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 0, 4, 0],
+                    coordinateSystem: 'polar',
+                    name: '社团活跃',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 0, 0, 6],
+                    coordinateSystem: 'polar',
+                    name: '图书馆',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 0, 0, 3],
+                    coordinateSystem: 'polar',
+                    name: 'T2',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [0, 0, 0, 6],
+                    coordinateSystem: 'polar',
+                    name: '6#',
+                    stack: 'a'
+                }
+                ],
+                legend: {
+                    orient: "vertical",
+                    x: "right",
+                    show: true,
+                    data: ['早睡早起', '晚睡熬夜', '午休', '不午休', '堂食', '外带外卖', '用餐高峰', '用餐低峰', '勤奋好学', '社团活跃', '图书馆', 'T2', '6#']
+                }
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('POI'));
+
+            var option = {
+                title: {
+                    text: "POI预测详情",
+                    left: "center",
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    left: 'right',
+                    data:['28','27','图书馆','6','T2']
+                },
+                series: [
+                    {
+                        name:'POI预测',
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:[
+                            {value:12, name:'28'},
+                            {value:8, name:'27'},
+                            {value:98, name:'图书馆'},
+                            {value:23, name:'6'},
+                            {value:452, name:'T2'}
+                        ]
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+
+    </body>
+</html>
