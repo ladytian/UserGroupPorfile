@@ -44,14 +44,6 @@ p {
 	height: 95%;
 }
 
-#infomation {
-	position: absolute;
-	top: auto;
-	right: 0;
-	width: 60%;
-	height: 95%;
-}
-
 #wordcloud {
 	position: absolute;
 	top: 12%;
@@ -70,7 +62,7 @@ p {
 	float: left;
 }
 
-#classification {
+#grade {
 	position: absolute;
 	top: 55%;
 	right: 30%;
